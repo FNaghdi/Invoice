@@ -1,14 +1,12 @@
 using Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 using Business.Services;
-using Business.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Business.DTOs.Person;
 
 namespace WebApplication5.Controllers
 {
     [ApiController]
-    [Authorize]
-
     [Route("[controller]/[action]")]
     public class PersonController : ControllerBase
     {

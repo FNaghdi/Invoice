@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.DTOs
+namespace Business.DTOs.Product
 {
-    public class ProductModel
+    public class ProductInfo
     {
-
+        public int ID { get; set; }
         public string ProductName { get; set; }
         public string ProductCode { get; set; }
 
         public string Mark { get; set; }
+
     }
 }

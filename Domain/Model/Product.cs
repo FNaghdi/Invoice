@@ -14,6 +14,8 @@ namespace Domain.Model
 
         public string Mark { get; set; }
 
+        public virtual ICollection<Purchaseinvoiceitems> Aghlamfaktors { get; } = new List<Purchaseinvoiceitems>();
+
 
 
     }

@@ -11,7 +11,10 @@
         public int Age { get; set; }
 
 
+        public virtual ICollection<PurchaseInvoice> purchaseInvoice { get; } = new List<PurchaseInvoice>();
 
-     
+
+
+
     }
 }

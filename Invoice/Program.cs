@@ -1,6 +1,7 @@
 using WebApplication5.Implementaions;
 using Domain.Model;
 using Business.Services;
+using Business.Implementaions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<PersonContext>();
 
 builder.Services.AddScoped<IProductAction, ProductAction>();
 builder.Services.AddScoped<IPersonAction, PersonAction>();
-
+builder.Services.AddScoped<IPurchaseinvoiceAction, PurchaseinvoiceAction>();
 
 var app = builder.Build();
 

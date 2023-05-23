@@ -1,4 +1,4 @@
-﻿using Business.DTOs;
+﻿using Business.DTOs.Product;
 using Business.Services;
 using Domain.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -8,20 +8,29 @@ namespace WebApplication5.Controllers
 {
     [ApiController]
 
+
     [Route("[controller]/[action]")]
-    public class ProductControler:ControllerBase
+    public class ProductController:ControllerBase
     {
 
 
 
-        private readonly ILogger<ProductControler> _logger;
+        private readonly ILogger<ProductController> _logger;
         private readonly IProductAction _productAction;
         private readonly IPersonAction _personAction;
-        public ProductControler(ILogger<ProductControler> logger, IProductAction productAction)
+        public ProductController(ILogger<ProductController> logger, IProductAction productAction)
         {
             _logger = logger;
            
             _productAction = productAction;
+        }
+
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+
+           var products= _productAction.GetProducts();
+            return Ok(products);
         }
 
 

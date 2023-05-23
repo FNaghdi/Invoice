@@ -4,6 +4,7 @@ using Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    partial class PersonContextModelSnapshot : ModelSnapshot
+    [Migration("20230522170336_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,8 +82,8 @@ namespace Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IDPerson")
                         .HasColumnType("int");
@@ -89,11 +92,14 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PersonID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("IDPerson");
+                    b.HasIndex("PersonID");
 
-                    b.ToTable("PurchaseInvoice", (string)null);
+                    b.ToTable("PurchaseInvoice");
                 });
 
             modelBuilder.Entity("Domain.Model.Purchaseinvoiceitems", b =>
@@ -111,29 +117,28 @@ namespace Domain.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("Number")
-                        .IsRequired()
-                        .HasColumnType("int")
-                        .HasColumnName("Number");
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PurchaseinvoiceID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Idcommodity");
+                    b.HasIndex("ProductID");
 
-                    b.HasIndex("Idpruchaseinvoice");
+                    b.HasIndex("PurchaseinvoiceID");
 
-                    b.ToTable("Purchaseinvoiceitems", (string)null);
+                    b.ToTable("Purchaseinvoiceitems");
                 });
 
             modelBuilder.Entity("Domain.Model.PurchaseInvoice", b =>
                 {
                     b.HasOne("Domain.Model.Person", "Person")
-                        .WithMany("purchaseInvoice")
-                        .HasForeignKey("IDPerson")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("PersonID");
 
                     b.Navigation("Person");
                 });
@@ -142,20 +147,15 @@ namespace Domain.Migrations
                 {
                     b.HasOne("Domain.Model.Product", "Product")
                         .WithMany("Aghlamfaktors")
-                        .HasForeignKey("Idcommodity");
+                        .HasForeignKey("ProductID");
 
                     b.HasOne("Domain.Model.PurchaseInvoice", "Purchaseinvoice")
                         .WithMany("purchaseinvoiceitems")
-                        .HasForeignKey("Idpruchaseinvoice");
+                        .HasForeignKey("PurchaseinvoiceID");
 
                     b.Navigation("Product");
 
                     b.Navigation("Purchaseinvoice");
-                });
-
-            modelBuilder.Entity("Domain.Model.Person", b =>
-                {
-                    b.Navigation("purchaseInvoice");
                 });
 
             modelBuilder.Entity("Domain.Model.Product", b =>

@@ -2,8 +2,8 @@
 using Domain.Model;
 using Business.Services;
 using System.Linq;
-using Business.DTOs;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using Business.DTOs.Person;
 
 namespace WebApplication5.Implementaions
 {

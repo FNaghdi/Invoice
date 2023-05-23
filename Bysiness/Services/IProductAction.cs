@@ -1,4 +1,5 @@
-﻿using Business.DTOs;
+﻿using Business.DTOs.Person;
+using Business.DTOs.Product;
 using Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Business.Services
         void Save( ProductModel productModel);
         void Update(Product product);
         void Delete(int idp);
+        List<ProductModel> GetProducts();
     }
 }

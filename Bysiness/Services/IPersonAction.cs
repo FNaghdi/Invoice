@@ -1,6 +1,4 @@
-﻿
-
-using Business.DTOs;
+﻿using Business.DTOs.Person;
 using Domain.Model;
 
 namespace Business.Services
